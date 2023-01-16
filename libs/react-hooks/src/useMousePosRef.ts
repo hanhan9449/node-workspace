@@ -10,11 +10,11 @@ export function useMousePosRef(defaultPos: MousePosInfo = {x: 0, y: 0, xPercent:
   const posRef = useRef<MousePosInfo>(defaultPos)
 
   useLayoutEffect(() => {
-    document.documentElement.addEventListener('mousemove', e => {
+    window.addEventListener('mousemove', e => {
       const x = e.clientX
       const y = e.clientY
-      const clientWidth = document.documentElement.clientWidth
-      const clientHeight = document.documentElement.clientHeight
+      const clientWidth = window.innerWidth
+      const clientHeight = window.innerHeight
       const xPercent = x / clientWidth
       const yPercent = y / clientHeight
 
