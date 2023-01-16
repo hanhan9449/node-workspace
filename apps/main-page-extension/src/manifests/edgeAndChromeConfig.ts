@@ -13,6 +13,7 @@ export const edgeAndChromeManifest =  {
     version: PureConst.VERSION,
     description: Const.DESCRIPTION,
     author: PureConst.AUTHOR,
+    default_locate: 'zh_CN',
     icons: {
         "16": icon16,
         "32": icon32,
