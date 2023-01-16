@@ -1,0 +1,27 @@
+.panel {
+    --p-color: #dedede;
+    --s-color: #ffffff;
+    --w: 30px;
+    transform: translate(calc(-2% + var(--x, 0)), calc(-2% + var(--y, 0)));
+    position: fixed;
+    inset: -10%;
+
+    background-position: 0 0, calc(var(--w) * 0.5) calc(var(--w) * 0.5);
+    background-size: var(--w) var(--w);
+    background-image:
+            linear-gradient(45deg, var(--p-color) 25%, transparent 0, transparent 75%, var(--p-color) 0),
+            linear-gradient(45deg, var(--p-color) 25%, transparent 0, transparent 75%, var(--p-color) 0);
+    transition: filter 100ms ease;
+}
+html[show-mask="1"] .panel {
+    filter: blur(2px);
+}
+
+html[show-mask="1"] .panel::after {
+    transition: all 100ms ease;
+    content: "";
+    inset: 0;
+    position: fixed;
+    background-color: rgba(0 0 0 / .06);
+}
+
