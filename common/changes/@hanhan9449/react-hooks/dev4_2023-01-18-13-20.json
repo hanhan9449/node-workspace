@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@hanhan9449/react-hooks",
+      "comment": "新增useBoolean，新增useCompositionState",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@hanhan9449/react-hooks"
+}
