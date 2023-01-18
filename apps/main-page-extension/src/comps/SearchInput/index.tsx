@@ -1,4 +1,4 @@
-import {PropsWithoutRef, useEffect, useLayoutEffect, useMemo, useState} from 'react';
+import {PropsWithoutRef, useEffect, useLayoutEffect, useMemo, useRef, useState} from 'react';
 import {
   Input,
   makeStyles,
@@ -23,6 +23,7 @@ import {llocalStorage, syncStorage} from "../../tools/storage";
 import {StorageKey} from "../../tools/storage-key";
 import {useDebounce} from "@hanhan9449/react-hooks";
 import {DEBUG} from "../../tools/simple-logger";
+import {useCompositionState} from "@hanhan9449/react-hooks";
 
 interface SearchInputProps extends WithStyle {
 }
@@ -189,24 +190,33 @@ export function SearchInput(props: PropsWithoutRef<SearchInputProps>) {
 
   </Menu>)
 
+  const inputRef = useRef<HTMLInputElement>(null)
+  const [isUseInputTool] = useCompositionState(inputRef)
+
   return (<div className={className} style={style}>
       <Input
           size={'large'}
           style={{
             border: '1px solid #eee'
           }}
+          ref={inputRef}
           contentBefore={contentBefore }
           contentAfter={<SearchRegular onClick={handleQuery} className={classes['input-after']} />}
           className={mergeClasses(classes.input, !!previewList.length && classes.inputFocusWithPreview)} type={'text'} placeholder={'Hello world...'}
           value={query}
           onKeyDown={e => {
+            if (isUseInputTool) {
+              return
+            }
             if (e.key.toLowerCase() === 'enter') {
               handleQuery()
             }
           }}
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}
-          onChange={(ev, data) => handleInputValueChange(data.value)}
+          onChange={(ev, data) => {
+            handleInputValueChange(data.value);
+          }}
       />
       {!!previewList.length && (
           <div className={classes.previewList}>
