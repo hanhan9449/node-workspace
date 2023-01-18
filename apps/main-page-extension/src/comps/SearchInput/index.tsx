@@ -8,7 +8,7 @@ import {
   MenuList,
   MenuPopover,
   MenuTrigger, mergeClasses,
-  shorthands
+  shorthands, tokens
 } from '@fluentui/react-components';
 import {WithStyle} from '../../type';
 import {SearchRegular} from '@fluentui/react-icons';
@@ -52,7 +52,7 @@ const useStyles = makeStyles({
     display: "block"
   },
   previewList: {
-    backgroundColor: '#fff',
+    backgroundColor: tokens.colorNeutralBackground1,
     borderBottomLeftRadius: '30px',
     borderBottomRightRadius: '30px',
     ...shorthands.padding('8px', '16px', '16px')
@@ -60,7 +60,7 @@ const useStyles = makeStyles({
   previewListItem: {
     ...shorthands.padding('12px', '8px'),
     ':hover': {
-      backgroundColor: 'aliceblue',
+      backgroundColor: tokens.colorBrandBackground2,
       cursor: 'pointer'
     }
   }
