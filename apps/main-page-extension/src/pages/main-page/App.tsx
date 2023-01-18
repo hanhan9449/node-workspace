@@ -7,6 +7,7 @@ import { SearchInput } from '../../comps/SearchInput';
 import {Avatar, makeStyles, shorthands} from '@fluentui/react-components';
 import icon from '../../assets/icon-512_512.jpg'
 import {bufferTime, filter, fromEvent, map, mapTo} from "rxjs";
+import {ThemeChangeFloatEntry} from "../../comps/ThemeChangeFloatEntry";
 
 const useStyles = makeStyles({
     container: {
@@ -21,12 +22,12 @@ const useStyles = makeStyles({
         marginBottom: 'calc(5vh + var(--move) * 3)',
         width: '10vw',
         minWidth: '128px',
-        transform: 'rotate(0turn)'
+        transform: 'rotate(0turn)',
     },
     spinAvatar: {
         ...shorthands.transition('transform', '300ms', '0', 'ease'),
         transform: 'rotate(3turn)'
-    }
+    },
 })
 export function App() {
     const classes = useStyles()
@@ -53,9 +54,10 @@ export function App() {
     return <div>
         <DesktopChessPanel>
             <div className={classes.container}>
-                <Avatar ref={avatarRef as any} size={128} image={{src: icon}} className={classes.avatar}></Avatar>
+                <Avatar draggable={false} ref={avatarRef as any} size={128} image={{src: icon}} className={classes.avatar}></Avatar>
                 <SearchInput />
             </div>
+            <ThemeChangeFloatEntry/>
         </DesktopChessPanel>
     </div>
 }
