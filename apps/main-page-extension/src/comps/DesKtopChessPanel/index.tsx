@@ -9,11 +9,20 @@ import {
 } from 'react';
 import './style.css'
 import classNames from 'classnames';
-import {makeStyles} from "@fluentui/react-components";
+import {makeStyles, mergeClasses, tokens} from "@fluentui/react-components";
+import {useThemeOption} from "../../hooks/useThemeOption";
 
 const useStyles = makeStyles({
   wrap: {
     transform: 'translate(0)'
+  },
+  chessPanel: {
+    backgroundColor: tokens.colorNeutralBackground1,
+    '--p-color': tokens.colorNeutralStencil1
+  },
+  chessPanelDark: {
+    backgroundColor: tokens.colorNeutralBackground1,
+    '--p-color': tokens.colorNeutralStencil2
   }
 })
 export function DesktopChessPanel(props: PropsWithChildren) {
@@ -33,8 +42,9 @@ export function DesktopChessPanel(props: PropsWithChildren) {
     }
     animate()
   }, [])
+  const {currentTheme} = useThemeOption()
   return <>
-      <div className={'panel'} ref={panelRef as any}/>
+      <div className={mergeClasses('panel', classes.chessPanel, currentTheme === '暗色 dark' && classes.chessPanelDark)} ref={panelRef as any}/>
       <div className={classes.wrap}>
         {props.children}
       </div>

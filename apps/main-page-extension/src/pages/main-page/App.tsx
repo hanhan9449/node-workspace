@@ -4,10 +4,18 @@ import {StorageKey} from "../../tools/storage-key";
 import { DesktopChessPanel } from '../../comps/DesKtopChessPanel';
 import './style.css'
 import { SearchInput } from '../../comps/SearchInput';
-import {Avatar, makeStyles, shorthands} from '@fluentui/react-components';
+import {
+    Avatar,
+    FluentProvider,
+    makeStyles,
+    shorthands,
+    teamsDarkTheme,
+    teamsLightTheme
+} from '@fluentui/react-components';
 import icon from '../../assets/icon-512_512.jpg'
 import {bufferTime, filter, fromEvent, map, mapTo} from "rxjs";
 import {ThemeChangeFloatEntry} from "../../comps/ThemeChangeFloatEntry";
+import {useThemeOption} from "../../hooks/useThemeOption";
 
 const useStyles = makeStyles({
     container: {
@@ -51,7 +59,16 @@ export function App() {
         })
         return () => id.unsubscribe()
     }, [])
+    const {currentTheme} = useThemeOption()
+    const fluentTheme = useMemo(() =>{
+        switch (currentTheme) {
+            case "亮色 light": return teamsLightTheme
+            case "暗色 dark": return teamsDarkTheme
+            default:
+        }
+    }, [currentTheme])
     return <div>
+        <FluentProvider theme={fluentTheme}>
         <DesktopChessPanel>
             <div className={classes.container}>
                 <Avatar draggable={false} ref={avatarRef as any} size={128} image={{src: icon}} className={classes.avatar}></Avatar>
@@ -59,5 +76,6 @@ export function App() {
             </div>
             <ThemeChangeFloatEntry/>
         </DesktopChessPanel>
+        </FluentProvider>
     </div>
 }

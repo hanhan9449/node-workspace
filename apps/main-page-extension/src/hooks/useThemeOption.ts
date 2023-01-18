@@ -8,6 +8,9 @@ export function useThemeOption() {
     const [currentTheme, setCurrentTheme] = useState<ThemeType>('自动 auto')
     useLayoutEffect(() => {
         llocalStorage.get(StorageKey.THEME_COLOR).then(it => setCurrentTheme(it ?? 'auto'))
+        llocalStorage.listen(StorageKey.THEME_COLOR, (next)=> {
+            setCurrentTheme(next);
+        })
     }, [])
 
 

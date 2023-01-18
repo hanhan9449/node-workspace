@@ -24,6 +24,7 @@ import {StorageKey} from "../../tools/storage-key";
 import {useDebounce} from "@hanhan9449/react-hooks";
 import {DEBUG} from "../../tools/simple-logger";
 import {useCompositionState} from "@hanhan9449/react-hooks";
+import {useThemeOption} from "../../hooks/useThemeOption";
 
 interface SearchInputProps extends WithStyle {
 }
@@ -193,11 +194,14 @@ export function SearchInput(props: PropsWithoutRef<SearchInputProps>) {
   const inputRef = useRef<HTMLInputElement>(null)
   const [isUseInputTool] = useCompositionState(inputRef)
 
+  const {currentTheme} = useThemeOption()
+
   return (<div className={className} style={style}>
       <Input
           size={'large'}
           style={{
-            border: '1px solid #eee'
+            border: '1px solid #eee',
+            borderColor: currentTheme === '暗色 dark' ? '#3a3a3a' : '#eee'
           }}
           ref={inputRef}
           contentBefore={contentBefore }
