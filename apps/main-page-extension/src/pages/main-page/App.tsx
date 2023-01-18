@@ -62,9 +62,10 @@ export function App() {
     const {currentTheme} = useThemeOption()
     const fluentTheme = useMemo(() =>{
         switch (currentTheme) {
-            case "亮色 light": return teamsLightTheme
             case "暗色 dark": return teamsDarkTheme
+            case "亮色 light":
             default:
+                return teamsLightTheme
         }
     }, [currentTheme])
     return <div>
